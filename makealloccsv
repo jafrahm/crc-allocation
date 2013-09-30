@@ -1,0 +1,18 @@
+#!/bin/bash
+# makealloccsv v 1.0; J. Frahm 03-27-2013
+# 
+
+# get the name of the file from today's date
+filedate=`date +"%Y%m%d"`
+
+# Test if file exists 
+if [[ -e ./$filedate.alloc.csv ]]; then echo "$filedate.alloc.csv already exists."
+else 
+  echo "Creating allocation file for $filedate"
+  /home/frahm/scripts/alloc-json-parser.sh >$filedate.alloc.csv
+  if [[ -e ./$filedate.alloc.csv ]]; then echo "created $filedate.alloc.csv" 
+  else
+    echo "An error occurred, file not created."
+  fi 
+fi
+exit 0
