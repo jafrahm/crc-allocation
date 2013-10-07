@@ -10,11 +10,11 @@ REQUEST_URL = 'https://portals.rc.colorado.edu/reporting/api/projects/%s/json/'
 
 def print_single_project(project):
     values = []
-    values.append(project['title'])
+    values.append(project['title'][:75])
     values.append(project['owner']['username'])
     values.append(project['name'])
-    values.append(project['start_date'])
-    values.append(project['end_date'])
+    values.append(project['start_date'][:10])
+    values.append(project['end_date'][:10])
     if project['over_limit']:
         values.append('over_limit')
     else:
@@ -31,11 +31,11 @@ def print_single_project(project):
 def print_projects(projects):
     for p in projects:
         values = []
-        values.append(p['title'])
+        values.append(p['title'][:75])
         values.append(p['owner']['username'])
         values.append(p['name'])
-        values.append(p['start_date'])
-        values.append(p['end_date'])
+        values.append(p['start_date'][:10])
+        values.append(p['end_date'][:10])
         if p['over_limit']:
             values.append('over_limit')
         else:
@@ -53,11 +53,11 @@ def print_projects_to_file(projects,output_filename):
     with open(output_filename,'w') as f:
         for p in projects:
             values = []
-            values.append(p['title'])
+            values.append(p['title'][:75])
             values.append(p['owner']['username'])
             values.append(p['name'])
-            values.append(p['start_date'])
-            values.append(p['end_date'])
+            values.append(p['start_date'][:10])
+            values.append(p['end_date'][:10])
             if p['over_limit']:
                 values.append('over_limit')
             else:
