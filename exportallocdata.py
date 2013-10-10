@@ -8,6 +8,7 @@ import datetime
 
 REQUEST_URL = 'https://portals.rc.colorado.edu/reporting/api/projects/%s/json/'
 
+
 def print_single_project(project):
     values = []
     values.append(project['title'][:75])
