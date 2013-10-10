@@ -46,13 +46,13 @@ if __name__=="__main__":
        username='jabr9336'
 
     print "You are listed as being a member of the following projects"
-    template="{0:40} | {1:20} | {2:10.0f} | {3:10.0f} | {4:10.0f}"
-    htemplate="{0:40} | {1:20} | {2:10} | {3:10} | {4:10}"
-    print htemplate.format("Title","Name","Balance","Used","Available")
+    template="{0:40} | {1:20} | {2:10.0f} | {3:10.0f} | {4:10.0f} | {5:10}"
+    htemplate="{0:40} | {1:20} | {2:10} | {3:10} | {4:10} | {5:10}"
+    print htemplate.format("Title","Name","Balance","Used","Available","End Date")
     for project in response:
        members = [x['username'] for x in project['members']]
        if username in members:
-          print template.format(project['title'],project['name'],project['credit'],project['used'],project['balance'])
+          print template.format(project['title'],project['name'],project['credit'],project['used'],project['balance'],project['end_date'].split('T')[0])
           if args.l: 
              print "  Memberlist:"
              for user in members:
