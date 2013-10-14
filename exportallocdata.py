@@ -100,6 +100,7 @@ if __name__ == '__main__':
         print 'HTTP request failed:\nIs the server down, or overloaded?\n'
         sys.exit(1)
     projects = json.load(data)
+    # import pdb; pdb.set_trace()
 
     if options.projectname:
         exists = False
@@ -118,29 +119,30 @@ if __name__ == '__main__':
             ).total_seconds()
         one_month = datetime.timedelta(seconds=2678400).total_seconds()
 
+        p_projects = projects[:]
         for i in range(0,len(projects)):
             try:
                 pdate = datetime.datetime.strptime(
                     projects[i]['end_date'],
-                    '%Y-%m-%dT%H:%M:%S.%fZ'
+                    '%Y-%m-%dT%H:%M:%S'
                     )
             except ValueError:
-                pdate = datetime.datetime.strptime(
-                    projects[i]['end_date'],
-                    '%Y-%m-%dT%H:%M:%SZ'
-                    )
+                sys.exit(1)
+
             proj_epoch = (pdate-datetime.datetime(1970,1,1)
             ).total_seconds()
 
-            if (curr_epoch-proj_epoch) > one_month:
-                projects.pop(i)
+            if (curr_epoch-proj_epoch) < one_month:
+                p_projects.append(projects[i])
 
         for i in range(0,len(projects)):
             try:
-                if projects[i]['over_limit']:
-                    projects.pop(i)
+                if not projects[i]['over_limit']:
+                    p_projects.append(projects[i])
             except IndexError:
                 break
+
+        projects = p_projects
 
     if not options.outputfile:
         print_projects(projects)
