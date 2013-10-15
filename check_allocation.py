@@ -52,7 +52,7 @@ if __name__=="__main__":
     for project in response:
        members = [x['username'] for x in project['members']]
        if username in members:
-          print template.format(project['title'],project['name'],project['credit'],project['used'],project['balance'],project['end_date'].split('T')[0])
+          print template.format(project['title'][:39],project['name'],project['credit'],project['used'],project['balance'],project['end_date'].split('T')[0])
           if args.l: 
              print "  Memberlist:"
              for user in members:
