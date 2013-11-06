@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+print "Requesting data, this may take up to 30 seconds..."
+
 import sys
 import getpass
 from pprint import pprint
